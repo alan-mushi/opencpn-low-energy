@@ -1,2 +1,2 @@
-opencpn-low-enegy
+opencpn-low-energy
 =================

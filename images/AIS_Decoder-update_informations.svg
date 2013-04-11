@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="50cm" height="50cm" viewBox="257 -66 995 994" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <path style="fill: #ffffff" d="M 303.56 -65 L 484.442,-65 C 509.416,-65 529.662,-56.0457 529.662,-45 C 529.662,-33.9543 509.416,-25 484.442,-25 L 303.56,-25 C 278.586,-25 258.34,-33.9543 258.34,-45 C 258.34,-56.0457 278.586,-65 303.56,-65z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 303.56 -65 L 484.442,-65 C 509.416,-65 529.662,-56.0457 529.662,-45 C 529.662,-33.9543 509.416,-25 484.442,-25 L 303.56,-25 C 278.586,-25 258.34,-33.9543 258.34,-45 C 258.34,-56.0457 278.586,-65 303.56,-65"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="394.001" y="-41">
+      <tspan x="394.001" y="-41">AIS_Decoder::OnTimerAIS()</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="308" y="136" width="172" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="308" y="136" width="172" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="394" y="158.9">
+      <tspan x="394" y="158.9">Remove old AIS targets</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="276.4" y="238" width="235.2" height="54"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="276.4" y="238" width="235.2" height="54"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="394" y="260.9">
+      <tspan x="394" y="260.9">Remove or mark old AIS targets</tspan>
+      <tspan x="394" y="276.9">(option)</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffff00" x="538" y="240.1" width="337.95" height="46.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="538" y="252">
+      <tspan x="538" y="252">Note:</tspan>
+      <tspan x="538" y="268">If the target didn't gave any information on 3 cycles,</tspan>
+      <tspan x="538" y="284">the target is removed from the AIS targets.</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="282.25" y="347" width="223.5" height="54"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="282.25" y="347" width="223.5" height="54"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="394" y="369.9">
+      <tspan x="394" y="369.9">Update collision alerts</tspan>
+      <tspan x="394" y="385.9">(detect if a collision is possible)</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="683.8" y="495" width="223.55" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="683.8" y="495" width="223.55" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="795.575" y="517.9">
+      <tspan x="795.575" y="517.9">Show the collision alert window</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="667.826" y="580" width="257.5" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="667.826" y="580" width="257.5" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="796.576" y="602.9">
+      <tspan x="796.576" y="602.9">Update the MMSI number of the ship</tspan>
+    </text>
+  </g>
+  <g>
+    <polygon style="fill: #ffffff" points="394,460.898 519.624,513.333 394,565.769 268.376,513.333 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="394,460.898 519.624,513.333 394,565.769 268.376,513.333 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="394" y="517.233">
+      <tspan x="394" y="517.233">A collision might happen</tspan>
+    </text>
+  </g>
+  <g>
+    <polygon style="fill: #ffffff" points="796.574,680.256 906.062,735 796.574,789.744 687.086,735 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="796.574,680.256 906.062,735 796.574,789.744 687.086,735 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="796.574" y="730.9">
+      <tspan x="796.574" y="730.9">Sound option for</tspan>
+      <tspan x="796.574" y="746.9">alerts is on</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1000.88" y="714" width="250.25" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1000.88" y="714" width="250.25" height="40"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="1025.9" y1="714" x2="1025.9" y2="754"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="1226.1" y1="714" x2="1226.1" y2="754"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1126" y="730">
+      <tspan x="1126" y="730">Set up the timer for the sound</tspan>
+      <tspan x="1126" y="746">(will emit the sound)</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="519.624" y1="513.334" x2="674.064" y2="513.961"/>
+    <polygon style="fill: #000000" points="681.564,513.991 671.544,518.95 674.064,513.961 671.584,508.95 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="681.564,513.991 671.544,518.95 674.064,513.961 671.584,508.95 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="795.574" y1="533" x2="796.368" y2="570.266"/>
+    <polygon style="fill: #000000" points="796.528,577.764 791.316,567.873 796.368,570.266 801.314,567.66 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="796.528,577.764 791.316,567.873 796.368,570.266 801.314,567.66 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="796.576" y1="618" x2="796.574" y2="670.52"/>
+    <polygon style="fill: #000000" points="796.574,678.02 791.574,668.02 796.574,670.52 801.574,668.02 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="796.574,678.02 791.574,668.02 796.574,670.52 801.574,668.02 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="906.064" y1="735" x2="991.14" y2="734.103"/>
+    <polygon style="fill: #000000" points="998.64,734.024 988.693,739.129 991.14,734.103 988.588,729.129 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="998.64,734.024 988.693,739.129 991.14,734.103 988.588,729.129 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="288.838" y="772" width="210.325" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="288.838" y="772" width="210.325" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="394" y="794.9">
+      <tspan x="394" y="794.9">Reset the AIS detection timer</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="292.15" y="37" width="203.7" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="292.15" y="37" width="203.7" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="394" y="59.9">
+      <tspan x="394" y="59.9">Stop the AIS detection timer</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="394" y1="-25" x2="394" y2="27.2639"/>
+    <polygon style="fill: #000000" points="394,34.7639 389,24.7639 394,27.2639 399,24.7639 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="394,34.7639 389,24.7639 394,27.2639 399,24.7639 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="394" y1="75" x2="394" y2="126.264"/>
+    <polygon style="fill: #000000" points="394,133.764 389,123.764 394,126.264 399,123.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="394,133.764 389,123.764 394,126.264 399,123.764 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="394" y1="174" x2="394" y2="228.264"/>
+    <polygon style="fill: #000000" points="394,235.764 389,225.764 394,228.264 399,225.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="394,235.764 389,225.764 394,228.264 399,225.764 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="394" y1="292" x2="394" y2="337.264"/>
+    <polygon style="fill: #000000" points="394,344.764 389,334.764 394,337.264 399,334.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="394,344.764 389,334.764 394,337.264 399,334.764 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="394" y1="401" x2="394" y2="451.162"/>
+    <polygon style="fill: #000000" points="394,458.662 389,448.662 394,451.162 399,448.662 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="394,458.662 389,448.662 394,451.162 399,448.662 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="394" y1="576.768" x2="394" y2="762.264"/>
+    <path style="fill: #ffffff" d="M 394 566.768 C 396.5,566.768 399,569.268 399,571.768 C 399,574.268 396.5,576.768 394,576.768 C 391.5,576.768 389,574.268 389,571.768 C 389,569.268 391.5,566.768 394,566.768z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 394 566.768 C 396.5,566.768 399,569.268 399,571.768 C 399,574.268 396.5,576.768 394,576.768 C 391.5,576.768 389,574.268 389,571.768 C 389,569.268 391.5,566.768 394,566.768"/>
+    <polygon style="fill: #000000" points="394,769.764 389,759.764 394,762.264 399,759.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="394,769.764 389,759.764 394,762.264 399,759.764 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="785.574" y1="789.79" x2="508.898" y2="790.959"/>
+    <path style="fill: #ffffff" d="M 795.574 789.748 C 795.585,792.248 793.095,794.759 790.595,794.769 C 788.095,794.78 785.585,792.29 785.574,789.79 C 785.564,787.29 788.053,784.78 790.553,784.769 C 793.053,784.759 795.563,787.248 795.574,789.748z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 795.574 789.748 C 795.585,792.248 793.095,794.759 790.595,794.769 C 788.095,794.78 785.585,792.29 785.574,789.79 C 785.564,787.29 788.053,784.78 790.553,784.769 C 793.053,784.759 795.563,787.248 795.574,789.748"/>
+    <polygon style="fill: #000000" points="501.398,790.991 511.377,785.948 508.898,790.959 511.419,795.948 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="501.398,790.991 511.377,785.948 508.898,790.959 511.419,795.948 "/>
+  </g>
+  <g>
+    <path style="fill: #ffffff" d="M 329.949 887 L 458.049,887 C 475.736,887 490.074,895.954 490.074,907 C 490.074,918.046 475.736,927 458.049,927 L 329.949,927 C 312.262,927 297.924,918.046 297.924,907 C 297.924,895.954 312.262,887 329.949,887z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 329.949 887 L 458.049,887 C 475.736,887 490.074,895.954 490.074,907 C 490.074,918.046 475.736,927 458.049,927 L 329.949,927 C 312.262,927 297.924,918.046 297.924,907 C 297.924,895.954 312.262,887 329.949,887"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="393.999" y="911">
+      <tspan x="393.999" y="911">End of the function</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="394" y1="810" x2="394" y2="877.264"/>
+    <polygon style="fill: #000000" points="394,884.764 389,874.764 394,877.264 399,874.764 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="394,884.764 389,874.764 394,877.264 399,874.764 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffff00" x="545.13" y="-57.9" width="336.531" height="30.9"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="545.13" y="-46">
+      <tspan x="545.13" y="-46">This function is triggered by the TimerAIS timer.</tspan>
+      <tspan x="545.13" y="-30">It will be executed every 998 ms (TIMER_AIS_MSEC).</tspan>
+    </text>
+  </g>
+</svg>
