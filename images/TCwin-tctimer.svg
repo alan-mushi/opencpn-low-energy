@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="45cm" height="25cm" viewBox="469 53 894 496" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <path style="fill: #ffffff" d="M 519.128 54 L 712.872,54 C 739.622,54 761.308,62.9543 761.308,74 C 761.308,85.0457 739.622,94 712.872,94 L 519.128,94 C 492.377,94 470.692,85.0457 470.692,74 C 470.692,62.9543 492.377,54 519.128,54z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 519.128 54 L 712.872,54 C 739.622,54 761.308,62.9543 761.308,74 C 761.308,85.0457 739.622,94 712.872,94 L 519.128,94 C 492.377,94 470.692,85.0457 470.692,74 C 470.692,62.9543 492.377,54 519.128,54"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="616" y="78">
+      <tspan x="616" y="78">MyFrame::OnFrameTCTimer()</tspan>
+    </text>
+  </g>
+  <g>
+    <polygon style="fill: #ffffff" points="615,125.062 716.875,176 615,226.938 513.124,176 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="615,125.062 716.875,176 615,226.938 513.124,176 "/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="615" y="179.9">
+      <tspan x="615" y="179.9">ChartCanvas exists</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="615.794" y1="94.9678" x2="615.602" y2="114.617"/>
+    <polygon style="fill: #000000" points="615.528,122.117 610.626,112.068 615.602,114.617 620.626,112.166 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="615.528,122.117 610.626,112.068 615.602,114.617 620.626,112.166 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="786.578" y="154" width="262.844" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="786.578" y="154" width="262.844" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="918" y="176.9">
+      <tspan x="918" y="176.9">Set update of tide and current to true</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="716.826" y1="174.992" x2="775.84" y2="174.408"/>
+    <polygon style="fill: #000000" points="783.34,174.333 773.39,179.432 775.84,174.408 773.291,169.433 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="783.34,174.333 773.39,179.432 775.84,174.408 773.291,169.433 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="828.002" y="336" width="181.594" height="38"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="828.002" y="336" width="181.594" height="38"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="918.799" y="358.9">
+      <tspan x="918.799" y="358.9">Refresh the ChartCanvas</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="918.088" y1="193.006" x2="918.668" y2="325.258"/>
+    <polygon style="fill: #000000" points="918.701,332.758 913.657,322.78 918.668,325.258 923.657,322.736 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="918.701,332.758 913.657,322.78 918.668,325.258 923.657,322.736 "/>
+  </g>
+  <g>
+    <path style="fill: #ffffff" d="M 600.825 507 L 631.176,507 C 635.366,507 638.763,515.954 638.763,527 C 638.763,538.046 635.366,547 631.176,547 L 600.825,547 C 596.635,547 593.238,538.046 593.238,527 C 593.238,515.954 596.635,507 600.825,507z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 600.825 507 L 631.176,507 C 635.366,507 638.763,515.954 638.763,527 C 638.763,538.046 635.366,547 631.176,547 L 600.825,547 C 596.635,547 593.238,538.046 593.238,527 C 593.238,515.954 596.635,507 600.825,507"/>
+    <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="616" y="531">
+      <tspan x="616" y="531">End</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="883.592" y1="374.999" x2="646.579" y2="509.63"/>
+    <polygon style="fill: #000000" points="640.058,513.335 646.283,504.048 646.579,509.63 651.222,512.743 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="640.058,513.335 646.283,504.048 646.579,509.63 651.222,512.743 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="615.179" y1="238.855" x2="615.913" y2="496.258"/>
+    <path style="fill: #ffffff" d="M 615.15 228.855 C 617.65,228.848 620.158,231.341 620.165,233.841 C 620.172,236.341 617.679,238.848 615.179,238.855 C 612.679,238.862 610.172,236.369 610.165,233.869 C 610.158,231.369 612.65,228.862 615.15,228.855z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 615.15 228.855 C 617.65,228.848 620.158,231.341 620.165,233.841 C 620.172,236.341 617.679,238.848 615.179,238.855 C 612.679,238.862 610.172,236.369 610.165,233.869 C 610.158,231.369 612.65,228.862 615.15,228.855"/>
+    <polygon style="fill: #000000" points="615.934,503.758 610.906,493.773 615.913,496.258 620.906,493.744 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="615.934,503.758 610.906,493.773 615.913,496.258 620.906,493.744 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1095.6" y="337" width="266.799" height="40"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1095.6" y="337" width="266.799" height="40"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="1122.28" y1="337" x2="1122.28" y2="377"/>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="1335.72" y1="337" x2="1335.72" y2="377"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1229" y="361">
+      <tspan x="1229" y="361">Update of current and tide data</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="1010.6" y1="355.592" x2="1084.87" y2="356.071"/>
+    <polygon style="fill: #000000" points="1092.37,356.119 1082.34,361.054 1084.87,356.071 1082.4,351.055 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1092.37,356.119 1082.34,361.054 1084.87,356.071 1082.4,351.055 "/>
+  </g>
+</svg>
