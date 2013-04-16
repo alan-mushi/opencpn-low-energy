@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<style type="text/css">
+table
+{
+	background-color: #F8F8F8;
+	color: black;
+}
+
+th
+{
+	text-align: right;
+}
+th.device
+{
+	text-align: left;
+}
+th.process
+{
+	text-align: left;
+}
+
+th.tunable
+{
+	text-align: left;
+}
+
+td.package_odd
+{
+	background-color: #E0ffE0;
+	color: black;
+	text-align: right;
+}
+td.package_even
+{
+	background-color: #F0ffF0;
+	color: black;
+	text-align: right;
+}
+
+td.core_even
+{
+	background-color: #F0ffF0;
+	color: black;
+	text-align: right;
+}
+
+td.core_odd
+{
+	background-color: #E0E0ff;
+	color: black;
+	text-align: right;
+}
+
+td.cpu_even_freq
+{
+	background-color: #E2E2E2;
+	color: black;
+}
+
+td.cpu_odd_freq
+{
+	background-color: #F4f4F4;
+	color: black;
+}
+
+td.cpu_even_even
+{
+	background-color: #E0E0f0;
+	color: black;
+	text-align: right;
+}
+
+td.cpu_even_odd
+{
+	background-color: #F0f0F0;
+	color: black;
+	text-align: right;
+}
+td.cpu_odd_even
+{
+	background-color: #E0E0ff;
+	color: black;
+	text-align: right;
+}
+
+td.cpu_odd_odd
+{
+	background-color: #F0ffF0;
+	color: black;
+	text-align: right;
+}
+
+tr.device_odd
+{
+	background-color: #E0E0E0;
+	color: black;
+}
+tr.device_even
+{
+	background-color: #F0f0F0;
+	color: black;
+}
+
+tr.process_odd
+{
+	background-color: #E0E0E0;
+	color: black;
+}
+tr.process_even
+{
+	background-color: #F0f0F0;
+	color: black;
+}
+
+td.device_power
+{
+	text-align: right;
+}
+
+td.process_power
+{
+	text-align: right;
+}
+
+td.device_util
+{
+	text-align: right;
+}
+
+tr.tunable_odd
+{
+	background-color: #E0E0E0;
+	color: black;
+}
+tr.tunable_even
+{
+	background-color: #F0f0F0;
+	color: black;
+}
+
+tr.tunable_odd_bad
+{
+	background-color: #FFE0E0;
+	color: black;
+}
+tr.tunable_even_bad
+{
+	background-color: #FFf0F0;
+	color: black;
+}
+
+tr.system_odd
+{
+	background-color: #E0E0E0;
+	color: black;
+}
+tr.system_even
+{
+	background-color: #F0f0F0;
+	color: black;
+}
+
+tr.device_odd
+{
+	background-color: #E0E0E0;
+	color: black;
+}
+tr.device_even
+{
+	background-color: #F0f0F0;
+	color: black;
+}
+
+body {
+	background-color: #eee; /* Background color */
+	color: #222;            /* Foreground color used for text */
+	font-family: Helvetica;
+	font-size: 14px;
+	margin: 0;              /* Amount of negative space around the
+                                   outside of the body */
+	padding: 0;             /* Amount of negative space around the
+                                   inside of the body */
+}
+#top h1 {
+	margin: 0;
+	padding: 0;
+}
+#top h1 a {
+	background-color: #ccc;
+	border-bottom: 1px solid #666;
+	color: #222;
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 10px 0;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0px 1px 1px #fff;
+	background-image: -webkit-gradient(linear, left top, left bottom,
+						from(#ccc), to(#999));
+}
+
+
+#top div {
+	height: 30px;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+	text-shadow: rgba(0,0,0,0.6) 0px -1px 1px;
+	line-height: 28px;
+	border-width:0px 8px 0px 8px;
+}
+#top div.SystemButton {
+	position: absolute;
+	top: 7px;
+	left: 6px;
+}
+#top div.SummaryButton {
+	position: absolute;
+	top: 7px;
+	left: 160px;
+}
+#top div.CpuidleButton {
+	position: absolute;
+	top: 7px;
+	left: 320px;
+}
+#top div.CpufreqButton {
+	position: absolute;
+	top: 7px;
+	left: 480px;
+}
+#top div.SoftwareButton {
+	position: absolute;
+	top: 7px;
+	left: 640px;
+}
+#top div.DeviceButton {
+	position: absolute;
+	top: 7px;
+	left: 800px;
+}
+#top div.TuningButton {
+	position: absolute;
+	top: 7px;
+	left: 960px;
+}
+#top div.AllButton {
+	position: absolute;
+	top: 7px;
+	left: 1120px;
+}
+div.pressed {
+	background-color: #000000;
+	border: 1px solid #000000;
+	color: #000000;
+	display: block;
+	border-width:0px 8px 0px 8px;
+	-webkit-border-top-left-radius: 8px;
+	-webkit-border-top-right-radius: 8px;
+	-webkit-border-bottom-left-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+}
+table.hide {
+	display: none;
+}
+h2.hide {
+	display: none;
+}
+p.hide {
+	display: none
+}
+</style>
+<table width="100%">
+<caption>With original opencpn</caption>
+<tr>
+	<th width="10%">Usage</th>
+	<th width="10%">Events/s</th>
+	<th width="10%" class="process">Category</th>
+	<th class="process">Description</th>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  0,5%</td>
+	<td class="process_power"> 26,0</td>
+	<td>Process</td>
+	<td>opencpn </td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  0,2%</td>
+	<td class="process_power"> 25,0</td>
+	<td>Process</td>
+	<td>./64bits/VirtualHub </td>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  0,1%</td>
+	<td class="process_power"> 20,0</td>
+	<td>Interrupt</td>
+	<td>[45] xhci_hcd</td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  0,1%</td>
+	<td class="process_power"> 16,8</td>
+	<td>Process</td>
+	<td>parcellite </td>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  0,2%</td>
+	<td class="process_power"> 13,9</td>
+	<td>Process</td>
+	<td>/usr/bin/python -OO /usr/bin/gmixer -d </td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  0,1%</td>
+	<td class="process_power"> 10,6</td>
+	<td>Interrupt</td>
+	<td>[7] sched(softirq)</td>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  0,7%</td>
+	<td class="process_power">  5,8</td>
+	<td>Process</td>
+	<td>/usr/bin/X -background none :0 vt07 -nolisten tcp </td>
+</tr>
+</table>
+<br />
+<table width="100%" class="">
+<caption>With original OpenCPN</caption>
+<tbody><tr>
+	<th width="10%">Usage</th>
+	<th width="10%">Wakeups/s</th>
+	<th width="10%">GPU ops/s</th>
+	<th width="10%">Disk IO/s</th>
+	<th width="10%">GFX Wakeups/s</th>
+	<th width="10%" class="process">Category</th>
+	<th class="process">Description</th>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  5,2 ms/s</td>
+	<td class="process_power"> 20,7</td>
+	<td class="process_power">  5,3</td>
+	<td class="process_power"></td>
+	<td class="process_power"> 10,1</td>
+	<td>Process</td>
+	<td>opencpn </td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  2,3 ms/s</td>
+	<td class="process_power"> 25,0</td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td>Process</td>
+	<td>./64bits/VirtualHub </td>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  1,2 ms/s</td>
+	<td class="process_power"> 20,0</td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td>Interrupt</td>
+	<td>[45] xhci_hcd</td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  0,9 ms/s</td>
+	<td class="process_power"> 16,8</td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td class="process_power">  7,8</td>
+	<td>Process</td>
+	<td>parcellite </td>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  1,7 ms/s</td>
+	<td class="process_power"> 12,3</td>
+	<td class="process_power">  1,6</td>
+	<td class="process_power"></td>
+	<td class="process_power">  6,3</td>
+	<td>Process</td>
+	<td>/usr/bin/python -OO /usr/bin/gmixer -d </td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  0,9 ms/s</td>
+	<td class="process_power"> 10,6</td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td>Interrupt</td>
+	<td>[7] sched(softirq)</td>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  6,9 ms/s</td>
+	<td class="process_power">  5,8</td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td>Process</td>
+	<td>/usr/bin/X -background none :0 vt07 -nolisten tcp </td>
+</tr>
+</tbody></table>
+<br />
+<hr />
+<br />
+<table width="100%">
+<caption>With opencpn and slowed timers</caption>
+<tr>
+	<th width="10%">Usage</th>
+	<th width="10%">Events/s</th>
+	<th width="10%" class="process">Category</th>
+	<th class="process">Description</th>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  0,3%</td>
+	<td class="process_power"> 37,3</td>
+	<td>Process</td>
+	<td>./64bits/VirtualHub </td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  0,1%</td>
+	<td class="process_power"> 21,2</td>
+	<td>Process</td>
+	<td>parcellite </td>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  0,2%</td>
+	<td class="process_power"> 17,3</td>
+	<td>Process</td>
+	<td>/usr/bin/python -OO /usr/bin/gmixer -d </td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  0,1%</td>
+	<td class="process_power">  6,9</td>
+	<td>Interrupt</td>
+	<td>[45] xhci_hcd</td>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  0,1%</td>
+	<td class="process_power">  4,8</td>
+	<td>Process</td>
+	<td>lxpanel --profile LXDE </td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  0,1%</td>
+	<td class="process_power">  3,1</td>
+	<td>Process</td>
+	<td>opencpn </td>
+</tr>
+</table>
+<br />
+<table width="100%" class="">
+<caption>With opencpn and slowed timers</caption>
+<tbody><tr>
+	<th width="10%">Usage</th>
+	<th width="10%">Wakeups/s</th>
+	<th width="10%">GPU ops/s</th>
+	<th width="10%">Disk IO/s</th>
+	<th width="10%">GFX Wakeups/s</th>
+	<th width="10%" class="process">Category</th>
+	<th class="process">Description</th>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  2,8 ms/s</td>
+	<td class="process_power"> 37,3</td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td>Process</td>
+	<td>./64bits/VirtualHub </td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  1,1 ms/s</td>
+	<td class="process_power"> 21,0</td>
+	<td class="process_power">  0,1</td>
+	<td class="process_power"></td>
+	<td class="process_power">  9,4</td>
+	<td>Process</td>
+	<td>parcellite </td>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">  2,1 ms/s</td>
+	<td class="process_power"> 15,4</td>
+	<td class="process_power">  1,9</td>
+	<td class="process_power"></td>
+	<td class="process_power">  7,8</td>
+	<td>Process</td>
+	<td>/usr/bin/python -OO /usr/bin/gmixer -d </td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">  1,1 ms/s</td>
+	<td class="process_power">  6,9</td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td class="process_power"></td>
+	<td>Interrupt</td>
+	<td>[45] xhci_hcd</td>
+</tr>
+<tr class="process_odd">
+	<td class="process_power">674,8 us/s</td>
+	<td class="process_power">  4,1</td>
+	<td class="process_power">  0,7</td>
+	<td class="process_power"></td>
+	<td class="process_power">  2,0</td>
+	<td>Process</td>
+	<td>lxpanel --profile LXDE </td>
+</tr>
+<tr class="process_even">
+	<td class="process_power">557,1 us/s</td>
+	<td class="process_power">  2,9</td>
+	<td class="process_power">  0,2</td>
+	<td class="process_power"></td>
+	<td class="process_power">  1,5</td>
+	<td>Process</td>
+	<td>opencpn </td>
+</tr>
+</tbody></table>
+
+<hr />
+
