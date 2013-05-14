@@ -17,6 +17,6 @@ for( var i = 2 ; i < rows.length ; i++ ) {
 }
 document.write( line.toString() );
 
-document.write( "<br /><br />Average Power : " );
+document.write( "<br /><br />;Average Power : " );
 var avgSession = sumSession / rows.length; // The average calculation
 document.write( avgSession );
