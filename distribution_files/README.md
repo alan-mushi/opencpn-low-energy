@@ -1,3 +1,5 @@
+The `datalogger.php` file is a modified version of the one gave with Yocto-Watt, we use it to do our measures.
+
 # File properties
 All files in this folder are included in the distribution.
 
