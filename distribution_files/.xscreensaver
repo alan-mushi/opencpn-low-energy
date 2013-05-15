@@ -1,0 +1,55 @@
+# XScreenSaver Preferences File
+# Written by xscreensaver-demo 5.20 for tux on Mon May 13 15:58:24 2013.
+# http://www.jwz.org/xscreensaver/
+
+timeout:	0:05:00
+cycle:		0:00:00
+lock:		False
+lockTimeout:	0:00:00
+passwdTimeout:	0:00:30
+visualID:	default
+installColormap:    True
+verbose:	False
+timestamp:	True
+splash:		False
+splashDuration:	0:00:05
+demoCommand:	xscreensaver-demo
+prefsCommand:	xscreensaver-demo -prefs
+nice:		19
+memoryLimit:	0
+fade:		False
+unfade:		False
+fadeSeconds:	0:00:02
+fadeTicks:	20
+captureStderr:	False
+ignoreUninstalledPrograms:True
+font:		*-medium-r-*-140-*-m-*
+dpmsEnabled:	True
+dpmsQuickOff:	True
+dpmsStandby:	2:00:00
+dpmsSuspend:	2:00:00
+dpmsOff:	4:00:00
+grabDesktopImages:  False
+grabVideoFrames:    False
+chooseRandomImages: False
+imageDirectory:	
+
+mode:		blank
+selected:	-1
+
+textMode:	date
+textLiteral:	XScreenSaver
+textFile:	
+textProgram:	fortune
+textURL:	http://twitter.com/statuses/public_timeline.atom
+
+programs:	-pan 30 -fade 5
+
+pointerPollTime:    0:00:05
+pointerHysteresis:  10
+windowCreationTimeout:0:00:30
+initialDelay:	0:00:00
+GetViewPortIsFullOfLies:False
+procInterrupts:	True
+xinputExtensionDev: False
+overlayStderr:	True

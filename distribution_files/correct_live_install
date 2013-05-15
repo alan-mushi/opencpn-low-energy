@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# delete the live user
+userdel tux
+
+# delete the icon 'install' on the desktop
+rm -f /home/*/Desktop/install.desktop
+
+# modifying grub config and rebuild grub
+grub_file='/etc/default/grub'
+if [ -e $grub_file ]; then
+	# changing the menu entry for our distribution if needed
+	DISTRIB_NAME=$(sed -n 7p $grub_file |awk 'BEGIN {FS="\""};{print $2}')
+	if [ "$DISTRIB_NAME" != "OpenCPN distribution" ] ; then 
+		sed -i -e "7s/GRUB_DISTRIBUTOR=\"openSUSE 12.3\"/GRUB_DISTRIBUTOR=\"OpenCPN distribution\"/" $grub_file
+		rebuild=true
+	fi
+
+	# this works because yast let a space after the opening " by default
+	#sed -i -e "12s/GRUB_CMDLINE_LINUX_DEFAULT=\" /GRUB_CMDLINE_LINUX_DEFAULT=\"maxcpus=1 /" $grub_file
+	
+	if [ $rebuild -a true ] ; then
+		grub2-mkconfig -o /boot/grub2/grub.cfg
+	fi
+fi

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# setting the screen brightness to 50% in one step
+xbacklight -set 50 -time 0 -steps 1 || other_way=true
+
+# if we can't set up the backlight with xbacklight, we use another way
+if [ $other_way = true ]; then
+	acpi_available=$(ls /proc/acpi/video/ 2> /dev/null |wc -l)
+	if [ $acpi_available -gt 0 ]; then
+		# if the video is supported by acpi
+		RES=$(($(cat /sys/class/backlight/acpi_video0/max_brightness) / 2))
+		echo $RES > /sys/class/backlight/acpi_video0/brightnes
+	else
+		# if the video is NOT supported by acpi
+		# we use the full path to reach ls because an alias may misbehave
+		BASE=$(/bin/ls -d /sys/class/backlight/*_backlight |head -n 1)
+		# just a precaution
+		if [ -n $BASE ]; then
+			RES=$(($(cat $BASE/max_brightness) / 2))
+			echo $RES > $BASE/brightness
+		fi
+	fi
+fi
