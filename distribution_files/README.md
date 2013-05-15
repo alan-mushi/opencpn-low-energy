@@ -9,7 +9,7 @@ All files in this folder are included in the distribution.
 		<tr><td colspan="4">Details : License print during the installation.</td></tr>
 		<tr><td>BackGround.png</td><td>/usr/share/wallpapers/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
 		<tr><td colspan="4">Details : Background of the desktop.</td></tr>
-		<tr><td>brightness</td><td>/usr/bin/</td><td>nobody / nobody</td><td>rwxr-xr-x</td></tr>
+		<tr><td>brightness</td><td>/usr/bin/</td><td>root / root</td><td>rwxr-xr-x</td></tr>
 		<tr><td colspan="4">Details : Script to reduce by half the brightness at login https://github.com/alan-mushi/opencpn-low-energy/wiki/Screen-brightness.</td></tr>
 		<tr><td>config</td><td>/etc/pm-profiler/opencpn/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
 		<tr><td colspan="4">Details : Custom profile https://github.com/alan-mushi/opencpn-low-energy/wiki/cpupower-and-pm-profiler#pm-profiler.</td></tr>
