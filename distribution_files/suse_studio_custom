@@ -59,8 +59,6 @@ fi
 # added here to "survive" the install
 if [ $(grep -c "/usr/bin/brightness" /etc/xdg/lxsession/LXDE/autostart) -eq 0 ]; then
 	echo "/usr/bin/brightness" >> /etc/xdg/lxsession/LXDE/autostart
-    # /!\ debug... /!\
-    echo "@lxterminal" >> /etc/xdg/lxsession/LXDE/autostart
 fi
 
 if [ $(sysctl -n vm.dirty_writeback_centisecs) != 360000 ] ; then
