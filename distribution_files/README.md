@@ -10,9 +10,9 @@ All files in this folder are included in the distribution.
 		<tr><td>BackGround.png</td><td>/usr/share/wallpapers/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
 		<tr><td colspan="4">Details : Background of the desktop.</td></tr>
 		<tr><td>brightness</td><td>/usr/bin/</td><td>nobody / nobody</td><td>rwxr-xr-x</td></tr>
-		<tr><td colspan="4">Details : [Script to reduce by half the brightness at login](https://github.com/alan-mushi/opencpn-low-energy/wiki/Screen-brightness).</td></tr>
+		<tr><td colspan="4">Details : Script to reduce by half the brightness at login https://github.com/alan-mushi/opencpn-low-energy/wiki/Screen-brightness.</td></tr>
 		<tr><td>config</td><td>/etc/pm-profiler/opencpn/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
-		<tr><td colspan="4">Details : [Custom profile](https://github.com/alan-mushi/opencpn-low-energy/wiki/cpupower-and-pm-profiler#pm-profiler).</td></tr>
+		<tr><td colspan="4">Details : Custom profile https://github.com/alan-mushi/opencpn-low-energy/wiki/cpupower-and-pm-profiler#pm-profiler.</td></tr>
 		<tr><td>correct_live_install</td><td>/usr/bin/</td><td>nobody / nobody</td><td>rwxr-xr-x</td></tr>
 		<tr><td colspan="4">Details : Script to run once the distribution is installed.</td></tr>
 		<tr><td>desktop.conf</td><td>/etc/xdg/lxsession/LXDE/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
@@ -30,6 +30,6 @@ All files in this folder are included in the distribution.
 		<tr><td>settings.ini</td><td>/etc/gtk-3.0/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
 		<tr><td colspan="4">Details : GTK configuration.</td></tr>
 		<tr><td>.xscreensaver</td><td>/etc/skel/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
-		<tr><td colspan="4">Details : [Settings for xscreensaver](https://github.com/alan-mushi/opencpn-low-energy/wiki/Screen-brightness#screen-saver).</td></tr>
+		<tr><td colspan="4">Details : Settings for xscreensaver https://github.com/alan-mushi/opencpn-low-energy/wiki/Screen-brightness#screen-saver.</td></tr>
 	</tbody>
 </table>
