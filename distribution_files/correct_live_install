@@ -5,6 +5,7 @@ userdel tux
 
 # delete the icon 'install' on the desktop
 rm -f /home/*/Desktop/install.desktop
+rm /etc/skel/Desktop/install.desktop
 
 # modifying grub config and rebuild grub
 grub_file='/etc/default/grub'
@@ -23,3 +24,12 @@ if [ -e $grub_file ]; then
 		grub2-mkconfig -o /boot/grub2/grub.cfg
 	fi
 fi
+
+# add a crontab to force the brightness (xscreensaver changes when it resumes)
+cat << EOT > /tmp/cron_task
+*/2 * * * * /usr/bin/brightness nosleep
+EOT
+
+crontab /tmp/cron_task
+rm /tmp/cron_task
+

@@ -19,12 +19,6 @@
 FREQ=$(cpupower frequency-info -l |tail -n 1 |cut -d " " -f 1) # we assume that all cores have the same limit than core 0
 cpupower -c all frequency-set -u $FREQ # we don't touch the governor, pm-profiles does it
 
-# in case the grub argument fails we disable all cores except the 0 one (it can't be stopped)
-#i=$(grep -c processor /proc/cpuinfo)
-#if [ i > 1 ]; then
-#    for j in /sys/devices/system/cpu/cpu*/online; do echo 0 > $j; done
-#fi
-
 # we stop / disable unwanted services
 if [ -n $(service --status-all |grep sshd | awk '{print $4}') ]; then
     systemctl stop sshd.service
