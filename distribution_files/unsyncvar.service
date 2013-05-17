@@ -5,9 +5,9 @@ Before=syslog.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/bin/sh -c '/home/tux/unsyncvar start'
-ExecReload=/bin/sh -c '/home/tux/unsyncvar reload'
-ExecStop=/bin/sh -c '/home/tux/unsyncvar stop'
+ExecStart=/bin/sh -c '/usr/bin/unsyncvar start'
+ExecReload=/bin/sh -c '/usr/bin/unsyncvar reload'
+ExecStop=/bin/sh -c '/usr/bin/unsyncvar stop'
 
 [Install]
 WantedBy=multi-user.target
