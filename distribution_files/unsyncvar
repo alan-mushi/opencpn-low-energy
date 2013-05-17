@@ -1,0 +1,88 @@
+#!/bin/sh
+# ROLE: Moves the contents of /var/log to RAM and keeps it there until reload or stop, when it copies the contents back to permanent storage.
+# SOURCE: http://www.debian-administration.org/articles/661
+# NOTE: used by /etc/systemd/system/unsyncvar.service
+
+
+NAME="transientlog"
+PATH_HDD="/var/permanentlog/"
+PATH_RAM="/var/log/"
+MODE="0755"
+SIZE="16M"
+
+start()
+{
+	echo $PATH_HDD
+	# Checks: Return
+	#   0 if transient log has been started
+	#   1 if transient log was already running
+	#   2 if transient log could not be started
+
+	[ -f /var/lock/$NAME.lock ] && return 1
+	[ `id -u` -eq 0 ] || return 2
+	[ -d $PATH_RAM ] || return 2
+	[ -d $PATH_HDD ] || mkdir -p $PATH_HDD
+
+	mount --bind $PATH_RAM $PATH_HDD
+	
+	#Stop propagation
+	mount --make-private $PATH_HDD
+
+	mount -t tmpfs -o nosuid,noexec,nodev,mode=$MODE,size=$SIZE $NAME $PATH_RAM
+	
+	mount --make-private $PATH_RAM
+
+	if [ $? -eq 0 ]; then
+		if cp -rfp $PATH_HDD -T $PATH_RAM; then
+			touch /var/lock/$NAME.lock
+			return 0
+		fi
+		# Rollback the mount
+		umount $PATH_RAM
+	fi
+	# Rollback the directory mangling
+	umount $PATH_HDD
+	return 2
+}
+stop() 
+{
+	# Return
+	#   0 if transient log has been stopped
+	#   1 if transient log was already stopped
+	#   2 if transient log could not be stopped
+	#   other if a failure occurred
+	[ -f /var/lock/$NAME.lock ] || return 1
+
+	# Check if I am root
+	[ `id -u` -eq 0 ] || return 2
+
+	# Merge back to permanent storage
+	cp -rfup $PATH_RAM -T $PATH_HDD
+
+	umount -l $PATH_RAM
+	umount -l $PATH_HDD
+	rm -r /var/lock/$NAME.lock
+	return 0
+}
+reload()
+{
+	# Return
+	#   0 if transient log has been reloaded
+	#   1 if transient log was not running
+	#   2 if transient log could not be reloaded
+
+	[ -f /var/lock/$NAME.lock ] || return 1
+        
+	# Check if I am root
+	[ `id -u` -eq 0 ] || return 2
+
+	# Merge back to permanent storage
+	cp -rfup $PATH_RAM -T $PATH_HDD
+	touch /var/lock/$NAME.lock
+	return 0
+}
+
+#Execute option
+if [ "$1" = "start" ] || [ "$1" = "stop" ] || [ "$1" = "reload" ]; then
+	$1
+fi
