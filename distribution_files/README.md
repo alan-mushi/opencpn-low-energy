@@ -31,6 +31,10 @@ The `datalogger.php` file is a modified version of the one gave with Yocto-Watt,
 		<tr><td colspan="4">Details : Remove the parcellite applet from the panel.</td></tr>
 		<tr><td>settings.ini</td><td>/etc/gtk-3.0/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
 		<tr><td colspan="4">Details : GTK configuration.</td></tr>
+		<tr><td>unsyncvar</td><td>/usr/bin</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
+		<tr><td colspan="4">Details : Service which allows to log into RAM</td></tr>
+		<tr><td>unsyncvar.service</td><td>/usr/bin</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
+		<tr><td colspan="4">Details : Systemd service which manages unsyncvar</td></tr>
 		<tr><td>.xscreensaver</td><td>/etc/skel/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
 		<tr><td colspan="4">Details : Settings for xscreensaver https://github.com/alan-mushi/opencpn-low-energy/wiki/Screen-brightness#screen-saver.</td></tr>
 	</tbody>
