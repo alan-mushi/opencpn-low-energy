@@ -26,10 +26,11 @@ if [ -e $grub_file ]; then
 fi
 
 # add a crontab to force the brightness (xscreensaver changes when it resumes)
-cat << EOT > /tmp/cron_task
-*/2 * * * * /usr/bin/brightness nosleep
-EOT
+ROOT=$(mount -l | grep ' on / '| awk '{print $1}')
+echo "*/2 * * * * /usr/bin/brightness nosleep" > /tmp/cron_task
+echo "* * * * * hdparm -Y $ROOT" >> /tmp/cron_task
 
 crontab /tmp/cron_task
 rm /tmp/cron_task
 
+systemctl enable unsyncvar.service
