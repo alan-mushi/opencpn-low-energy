@@ -1,11 +1,18 @@
 #!/bin/bash
 
-# delete the live user
-userdel -r tux
+# delete the icon 'install' on desktops
+rm -f /home/*/Desktop/install.desktop /etc/skel/Desktop/install.desktop
 
-# delete the icon 'install' on the desktop
-rm -f /home/*/Desktop/install.desktop
-rm /etc/skel/Desktop/install.desktop
+
+if [ $(/bin/ls -1 /home |wc -l) != 1 ]; then 
+	# this user isn't needed anymore
+	userdel -r tux
+else
+	# if the user kept the same username, we "refresh" his directory
+	rm -rf /home/tux/*
+	cp -r /etc/skel/* /home/tux/
+	chown -R tux:users /home/tux/
+fi
 
 # modifying grub config and rebuild grub
 grub_file='/etc/default/grub'
@@ -14,22 +21,17 @@ if [ -e $grub_file ]; then
 	DISTRIB_NAME=$(sed -n 7p $grub_file |awk 'BEGIN {FS="\""};{print $2}')
 	if [ "$DISTRIB_NAME" != "OpenCPN distribution" ] ; then 
 		sed -i -e "7s/GRUB_DISTRIBUTOR=\"openSUSE 12.3\"/GRUB_DISTRIBUTOR=\"OpenCPN distribution\"/" $grub_file
-		rebuild=true
-	fi
-
-	# this works because yast let a space after the opening " by default
-	#sed -i -e "12s/GRUB_CMDLINE_LINUX_DEFAULT=\" /GRUB_CMDLINE_LINUX_DEFAULT=\"maxcpus=1 /" $grub_file
-	
-	if [ $rebuild -a true ] ; then
 		grub2-mkconfig -o /boot/grub2/grub.cfg
 	fi
 fi
 
 # add a crontab to force the brightness (xscreensaver changes when it resumes)
-ROOT=$(mount -l | grep ' on / '| awk '{print $1}')
+# and force the disk(s) to stop
 echo "*/2 * * * * /usr/bin/brightness nosleep" > /tmp/cron_task
-echo "* * * * * hdparm -Y $ROOT" >> /tmp/cron_task
-
+ROOT=$(mount -l | grep ' on / '| awk '{print $1}')
+# produce :
+#	* * * * * hdparm -Y /dev/sda1 ; [hdparm -Y /dev/sdX ; ]...
+echo "* * * * * " $(for i in $ROOT ; do echo "hdparm -Y $i ; " ; done) >> /tmp/cron_task
 crontab /tmp/cron_task
 rm /tmp/cron_task
 
