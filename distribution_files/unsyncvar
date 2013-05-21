@@ -12,16 +12,15 @@ SIZE="16M"
 
 start()
 {
-	echo $PATH_HDD
-	# Checks: Return
-	#   0 if transient log has been started
-	#   1 if transient log was already running
-	#   2 if transient log could not be started
+	# Return
+	#	0	if operations are sucessful (or service already running)
+	#	1	if something went wrong (folder doesn't exists or can't be created)
+	#	4	if transient log isn't running as root
 
-	[ -f /var/lock/$NAME.lock ] && return 1
-	[ `id -u` -eq 0 ] || return 2
-	[ -d $PATH_RAM ] || return 2
-	[ -d $PATH_HDD ] || mkdir -p $PATH_HDD
+	[ -f /var/lock/$NAME.lock ] && return 0
+	[ `id -u` -eq 0 ] || return 4
+	[ -d $PATH_RAM ] || return 1
+	[ -d $PATH_HDD ] || mkdir -p $PATH_HDD || return 1
 
 	mount --bind $PATH_RAM $PATH_HDD
 	
@@ -42,19 +41,20 @@ start()
 	fi
 	# Rollback the directory mangling
 	umount $PATH_HDD
-	return 2
+	rm -f /var/lock/$NAME.lock
+	
+	return 1
 }
+
 stop() 
 {
 	# Return
-	#   0 if transient log has been stopped
-	#   1 if transient log was already stopped
-	#   2 if transient log could not be stopped
-	#   other if a failure occurred
-	[ -f /var/lock/$NAME.lock ] || return 1
+	#	0	if daemon has been stopped (or was already stopped)
+	#	4	if the script isn't running as root
+	[ -f /var/lock/$NAME.lock ] || return 0
 
 	# Check if I am root
-	[ `id -u` -eq 0 ] || return 2
+	[ `id -u` -eq 0 ] || return 4
 
 	# Merge back to permanent storage
 	cp -rfup $PATH_RAM -T $PATH_HDD
@@ -64,25 +64,29 @@ stop()
 	rm -r /var/lock/$NAME.lock
 	return 0
 }
+
 reload()
 {
 	# Return
-	#   0 if transient log has been reloaded
-	#   1 if transient log was not running
-	#   2 if transient log could not be reloaded
+	#	0	if transient log has been reloaded
+	#	4	if the script isn't running as root
 
-	[ -f /var/lock/$NAME.lock ] || return 1
+	[ -f /var/lock/$NAME.lock ] || return 0
         
 	# Check if I am root
-	[ `id -u` -eq 0 ] || return 2
+	[ `id -u` -eq 0 ] || return 4
 
 	# Merge back to permanent storage
 	cp -rfup $PATH_RAM -T $PATH_HDD
-	touch /var/lock/$NAME.lock
 	return 0
 }
 
 #Execute option
-if [ "$1" = "start" ] || [ "$1" = "stop" ] || [ "$1" = "reload" ]; then
-	$1
-fi
+case $1 in
+	start|stop|reload)
+		$1
+		;;
+	*)
+		echo "Usage : systemctl {start|stop|status|reload} $0"
+		;;
+esac
