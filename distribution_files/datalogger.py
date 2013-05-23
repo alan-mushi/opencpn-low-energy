@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import os,sys,argparse
-# add Sources to the PYTHONPATH
 sys.path.append(os.path.join("Sources"))
 from yocto_api import *
 from yocto_datalogger import *
@@ -17,7 +16,8 @@ parser.add_argument( "-o", "--output", dest="output_file", nargs=1, help="output
 parser.add_argument( "-c", "--chart-output", dest="chart_output", action='store_true', help="Exports in a csv file ready for charts. Need --dump-last or --duration." )
 group = parser.add_mutually_exclusive_group()
 group.add_argument( "-m", "--measure-duration", dest="duration", type=int, help="duration of the measure in seconds." )
-group.add_argument( "-d", "--dump-last", dest="dump_last", action="store_true", help="dump the last data stream." )
+group.add_argument( "-l", "--list-datastreams", dest="list_datastreams", action="store_true", help="list available data streams." )
+group.add_argument( "-d", "--dump-last", dest="dump_last", type=int, help="dump supplied data stream." )
 args = parser.parse_args()
 
 if len(sys.argv) == 1 :
@@ -29,9 +29,6 @@ errmsg = YRefParam()
 if YAPI.RegisterHub( "usb", errmsg ) != YAPI.SUCCESS :
 	sys.exit( "[-] Failed register hub : " + errmsg.value )
 
-#################
-### Functions ###
-#################
 
 # List yocto-* usb devices with a datalogger module.
 # Print their serial number and logical name.
@@ -53,6 +50,25 @@ def list_devices() :
 
 		logger = logger.nextDataLogger()
 # end of list_devices()
+
+
+##############################
+# Handling the 'serial' option
+if args.serial != None :
+	logger = YDataLogger.FindDataLogger( args.serial )
+	if not logger.isOnline() :
+		sys.stderr.write( "[-] The device can't be found, check your serial parameter or your USB cable." )
+		sys.exit( 1 )
+	else :
+		print "[+] Device " + args.serial + " found."
+		if args.flush == False and args.dump_last == None and args.duration == None and args.list_datastreams == False :
+			sys.stderr.write( "[-] You have to select an action {--flush | --dump-last | --measure-duration}.\n\tSee " + sys.argv[0] + " for details.\n" )
+			sys.exit( 1 )
+else :
+	print "[*] List all currently available devices :"
+	list_devices()
+	sys.exit( 0 )
+
 
 # Write the supplied data stream in the filename.
 # std_csv = { True | False }
@@ -88,7 +104,10 @@ def write_stream( stream, filename, std_csv = True ) :
 		row_interval = stream.get_dataSamplesInterval()
 	
 	table = stream.get_dataRows()
-	table.pop( 0 ) # remove the initial measure (actual value when the measure start)
+
+	if std_csv :
+		table.pop( 0 ) # remove the initial measure (actual value when the measure start)
+
 	for row in table :
 		if std_csv :
 			log_file.write( str( i ) + ';' )
@@ -105,53 +124,43 @@ def write_stream( stream, filename, std_csv = True ) :
 	print "[+] '" + filename + "' log wrote"
 # end of write_stream()
 
-# "Proxy" for write_stream.
-# Set the filenames (for regular csv and chart csv) and the last data stream.
-def dump() :
+def get_data_streams_max_offset() :
 	dataStreams = YRefParam()
 	if logger.get_dataStreams( dataStreams ) != YAPI.SUCCESS :
 		sys.stderr.write( "[-] Fetch of data streams (get_dataStreams) failed, exiting...\n" )
 		sys.exit( 1 )
-	offset_last_stream = len(dataStreams.value) -1
-	if offset_last_stream <= 0 :
-		sys.stderr.write( "[-] No data stream available, exiting...\n" )
+	return ( len(dataStreams.value) - 1 )
+
+# "Proxy" for write_stream.
+# Set the filenames (for regular csv and chart csv) and the last data stream.
+def dump( data_stream_offset = None ) :
+	dataStreams = YRefParam()
+	if logger.get_dataStreams( dataStreams ) != YAPI.SUCCESS :
+		sys.stderr.write( "[-] Fetch of data streams (get_dataStreams) failed, exiting...\n" )
 		sys.exit( 1 )
-	last_stream = dataStreams.value[offset_last_stream]
+
+	if data_stream_offset == None :
+		data_stream_offset = get_data_streams_max_offset()
+
+	stream = dataStreams.value[data_stream_offset]
 
 	filename = args.output_file
 	if filename == None :
 		# making default filename
-		filename = "log_stream_" + str( offset_last_stream ) + ".csv"
+		filename = "log_stream_" + str( data_stream_offset ) + ".csv"
+	else :
+		filename = filename[0]
 
-	write_stream( last_stream, filename, True )
+	write_stream( stream, filename, True )
 
-	if args.chart_output != None :
+	if args.chart_output :
 		# making default filename
 		chart_filename = "chart_" + filename
-		write_stream( last_stream, chart_filename, False )
+		write_stream( stream, chart_filename, False )
 # end of dump()
 
-#####################
-### End Functions ###
-#####################
 
-
-# Handling the 'serial' option
-if args.serial != None :
-	logger = YDataLogger.FindDataLogger( args.serial )
-	if not logger.isOnline() :
-		sys.stderr.write( "[-] The device can't be found, check your serial parameter or your USB cable." )
-		sys.exit( 1 )
-	else :
-		print "[+] Device " + args.serial + " found."
-		if args.flush == False and args.dump_last == False and args.duration == None :
-			sys.stderr.write( "[-] You have to select an action {--flush | --dump-last | --measure-duration}.\n\tSee " + sys.argv[0] + " for details.\n" )
-			sys.exit( 1 )
-else :
-	print "[*] List all currently available devices :"
-	list_devices()
-	sys.exit( 0 )
-
+#############################
 # Handling the 'flush' option
 if args.flush :
 	if logger.forgetAllDataStreams() != YAPI.SUCCESS :
@@ -160,6 +169,8 @@ if args.flush :
 	else :
 		print "[+] Flushing of runs & logs done."
 
+
+################################
 # Handling the 'duration' option
 if args.duration != None and args.duration <= 0 :
 	sys.stderr.write( "[-] Invalid log/measure duration.\n" )
@@ -168,22 +179,56 @@ elif args.duration != None :
 	if logger.get_autoStart() == YDataLogger.AUTOSTART_ON :
 		logger.set_recording( YDataLogger.RECORDING_OFF )
 	
+
+	print "\n[*] Start logger at " + datetime.fromtimestamp(logger.get_timeUTC()).strftime('%H:%M:%S') + " (device time)",
+	print "for " + str( args.duration ) + " seconds. Data stream # " + str( get_data_streams_max_offset()+1 )
+	logger.set_timeUTC( int( time.time() ) )
+	
 	if logger.set_recording( YDataLogger.RECORDING_ON ) != YAPI.SUCCESS :
 		sys.stderr.write( "[-] The logger can't be started, exiting...\n" )
 		sys.exit( 1 )
 
-	print "\n[+] Start logger at " + datetime.fromtimestamp(logger.get_timeUTC()).strftime('%H:%M:%S') + " (device time)",
-	print "for " + str( args.duration ) + " seconds."
 	time.sleep( args.duration )
+
 	if logger.set_recording( YDataLogger.RECORDING_OFF ) != YAPI.SUCCESS :
 		sys.stderr.write( "[-] The logger can't be stopped, exiting..." )
 		sys.exit( 1 )
-	print "[+] Stop logger at " + datetime.fromtimestamp(logger.get_timeUTC()).strftime('%H:%M:%S') + " (device time)"
+
+	print "[*] Stop logger at " + datetime.fromtimestamp(logger.get_timeUTC()).strftime('%H:%M:%S') + " (device time)"
 
 	print "\n[*] Writting the results to disk..."
 	dump()
 
+
+#################################
 # Handling the 'dump_last' option
-if args.dump_last :
+if args.dump_last != None and args.dump_last >= 0 and args.dump_last <= get_data_streams_max_offset() :
 	print "\n[*] Dumping last data stream..."
-	dump()
+	dump( args.dump_last )
+elif args.dump_last != None :
+	sys.stderr.write( "[-] Invalid data stream, exiting...\n" )
+	sys.exit( 1 )
+
+
+#######################################
+# Handling the 'list_datastream' option
+if args.list_datastreams and get_data_streams_max_offset() == -1 :
+	print "[*] There isn't any data stream stored on this device."
+elif args.list_datastreams :
+	dataStreams = YRefParam()
+	if logger.get_dataStreams( dataStreams ) != YAPI.SUCCESS :
+		sys.stderr.write( "[-] Fetch of data streams (get_dataStreams) failed, exiting...\n" )
+		sys.exit( 1 )
+	print "\n[+] List of data streams : 'time' stands for 'start time' (month-day hour:min:second)\n"
+	print " run # | data stream # | time (device)  | time UTC (device) | time between samples (seconds)"
+	print "-" * 93
+	for i in range( len( dataStreams.value ) ) :
+		stream = dataStreams.value[i]
+		print " " * 3 + str(stream.get_runIndex()) + " " * 3 + "|" + " " * 7 + str(i) + " " * 7 + "|",
+		print datetime.fromtimestamp( stream.get_startTime() ).strftime( '%m-%d %H:%M:%S' ) + " | ",
+		if stream.get_startTimeUTC() > 0 :
+			print datetime.fromtimestamp( stream.get_startTimeUTC() ).strftime( '%m-%d %H:%M:%S' ) + " | ",
+		else :
+			print " " * 17 + "|" + " " * 10,
+
+		print str( stream.get_dataSamplesInterval() )
