@@ -110,9 +110,12 @@ def write_stream( stream, filename, std_csv = True ) :
 def dump() :
 	dataStreams = YRefParam()
 	if logger.get_dataStreams( dataStreams ) != YAPI.SUCCESS :
-		sys.stderr.write("[-] Fetch of data streams (get_dataStreams) failed, exiting...\n")
+		sys.stderr.write( "[-] Fetch of data streams (get_dataStreams) failed, exiting...\n" )
 		sys.exit( 1 )
 	offset_last_stream = len(dataStreams.value) -1
+	if offset_last_stream <= 0 :
+		sys.stderr.write( "[-] No data stream available, exiting...\n" )
+		sys.exit( 1 )
 	last_stream = dataStreams.value[offset_last_stream]
 
 	filename = args.output_file
@@ -141,6 +144,9 @@ if args.serial != None :
 		sys.exit( 1 )
 	else :
 		print "[+] Device " + args.serial + " found."
+		if args.flush == False and args.dump_last == False and args.duration == None :
+			sys.stderr.write( "[-] You have to select an action {--flush | --dump-last | --measure-duration}.\n\tSee " + sys.argv[0] + " for details.\n" )
+			sys.exit( 1 )
 else :
 	print "[*] List all currently available devices :"
 	list_devices()
@@ -149,7 +155,8 @@ else :
 # Handling the 'flush' option
 if args.flush :
 	if logger.forgetAllDataStreams() != YAPI.SUCCESS :
-		sys.stderr.write( "[-] Undefined error while flushing runs & logs.")
+		sys.stderr.write( "[-] Undefined error while flushing runs & logs, exiting...\n" )
+		sys.exit( 1 )
 	else :
 		print "[+] Flushing of runs & logs done."
 
@@ -169,14 +176,14 @@ elif args.duration != None :
 	print "for " + str( args.duration ) + " seconds."
 	time.sleep( args.duration )
 	if logger.set_recording( YDataLogger.RECORDING_OFF ) != YAPI.SUCCESS :
-		sys.stderr.write( "[-] The logger can't be stopped, exiting...")
+		sys.stderr.write( "[-] The logger can't be stopped, exiting..." )
 		sys.exit( 1 )
 	print "[+] Stop logger at " + datetime.fromtimestamp(logger.get_timeUTC()).strftime('%H:%M:%S') + " (device time)"
 
-	print "\n[*] Writting the results to disk"
+	print "\n[*] Writting the results to disk..."
 	dump()
 
 # Handling the 'dump_last' option
 if args.dump_last :
-	print "\n[*] Dumping last data stream"
+	print "\n[*] Dumping last data stream..."
 	dump()
