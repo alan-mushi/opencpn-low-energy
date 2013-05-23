@@ -9,15 +9,15 @@ from datetime import *
 
 import time
 
-parser = argparse.ArgumentParser( description="Take and fetch measures from a Yocto-X usb device. Exports the data in csv" )
+parser = argparse.ArgumentParser( description="Take and fetch measures from a Yocto-X usb device. Exports the data in csv." )
 parser.add_argument( "-s", "--serial", dest="serial", nargs='?', required=True, help="the Yocto-Watt serial to use. If no argument is specified, print all available devices.")
-parser.add_argument ("-f", "--flush", dest="flush", action="store_true", help="delete all the runs and logs on the device's memory. Is executed before anything else." )
-parser.add_argument( "-o", "--output", dest="output_file", nargs=1, help="output file for the data. If none specified, a default name is used for --duration and --dump-last." )
-parser.add_argument( "-c", "--chart-output", dest="chart_output", action='store_true', help="Exports in a csv file ready for charts. Need --dump-last or --duration." )
+parser.add_argument ("-f", "--flush", dest="flush", action="store_true", help="delete all the runs and data streams on the device's memory. Is executed first." )
+parser.add_argument( "-o", "--output", dest="output_file", nargs=1, help="output file for the data. If none specified, a default name is used for --measure-duration and --dump log output file." )
+parser.add_argument( "-c", "--chart-output", dest="chart_output", action='store_true', help="Exports in a csv file ready for charts (no time stamps). Need --dump or --measure-duration." )
 group = parser.add_mutually_exclusive_group()
-group.add_argument( "-m", "--measure-duration", dest="duration", type=int, help="duration of the measure in seconds." )
+group.add_argument( "-m", "--measure-duration", dest="duration", type=int, help="duration of the measure in seconds, then dump the log." )
 group.add_argument( "-l", "--list-datastreams", dest="list_datastreams", action="store_true", help="list available data streams." )
-group.add_argument( "-d", "--dump-last", dest="dump_last", type=int, help="dump supplied data stream." )
+group.add_argument( "-d", "--dump", dest="dump_stream", type=int, help="dump supplied data stream." )
 args = parser.parse_args()
 
 if len(sys.argv) == 1 :
@@ -61,7 +61,7 @@ if args.serial != None :
 		sys.exit( 1 )
 	else :
 		print "[+] Device " + args.serial + " found."
-		if args.flush == False and args.dump_last == None and args.duration == None and args.list_datastreams == False :
+		if args.flush == False and args.dump_stream == None and args.duration == None and args.list_datastreams == False :
 			sys.stderr.write( "[-] You have to select an action {--flush | --dump-last | --measure-duration}.\n\tSee " + sys.argv[0] + " for details.\n" )
 			sys.exit( 1 )
 else :
@@ -201,11 +201,11 @@ elif args.duration != None :
 
 
 #################################
-# Handling the 'dump_last' option
-if args.dump_last != None and args.dump_last >= 0 and args.dump_last <= get_data_streams_max_offset() :
+# Handling the 'dump_stream' option
+if args.dump_stream != None and args.dump_stream >= 0 and args.dump_stream <= get_data_streams_max_offset() :
 	print "\n[*] Dumping last data stream..."
-	dump( args.dump_last )
-elif args.dump_last != None :
+	dump( args.dump_stream )
+elif args.dump_stream != None :
 	sys.stderr.write( "[-] Invalid data stream, exiting...\n" )
 	sys.exit( 1 )
 
