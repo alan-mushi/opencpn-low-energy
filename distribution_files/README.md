@@ -1,7 +1,10 @@
-The `datalogger.php` file is a modified version of the one gave with Yocto-Watt, we use it to do our measures.
+The `old_datalogger.php` file is a modified version of the one gave with Yocto-Watt, we used it to do our measures. To extract the data and format them in csv, we used `old_extract.js`.
+
+Now the method to take measures is completely different, we use the `datalogger.py` script. You can find more informations about it [here](https://github.com/alan-mushi/opencpn-low-energy/wiki/using-datalogger.py).
 
 # File properties
-(Almost) All files in this folder are included in the distribution.
+
+Files integrated in the distribution :
 
 <table border="1">
 	<thead>
