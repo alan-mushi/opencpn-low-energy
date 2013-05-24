@@ -114,7 +114,8 @@ def write_stream( stream, filename, std_csv = True ) :
 
 		for pos in range(len(row)) :
 			if not pos in exclude_log_offsets :
-				log_file.write( str( row[pos] ) + ';' )
+				val = str( row[pos] )
+				log_file.write( val.replace( '.', ',' ) + ';' )
 		log_file.write( '\n' )
 
 		if std_csv :
@@ -227,7 +228,7 @@ elif args.list_datastreams :
 		print " " * 3 + str(stream.get_runIndex()) + " " * 3 + "|" + " " * 7 + str(i) + " " * 7 + "|",
 		print datetime.fromtimestamp( stream.get_startTime() ).strftime( '%m-%d %H:%M:%S' ) + " | ",
 		if stream.get_startTimeUTC() > 0 :
-			print datetime.fromtimestamp( stream.get_startTimeUTC() ).strftime( '%m-%d %H:%M:%S' ) + " | ",
+			print datetime.fromtimestamp( stream.get_startTimeUTC() ).strftime( '%m-%d %H:%M:%S' ) + "   | ",
 		else :
 			print " " * 17 + "|" + " " * 10,
 
