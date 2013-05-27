@@ -24,7 +24,7 @@ This is where you will do some modifications. Click on the "Edit Partition Setup
 
 **You will have to do the following manipulation for each partition (if you want multiple partitions).**
 
-1. Select and edit a partition
+1. Select and edit a partition (2 and 3 of the picture above)
 2. Edit the options for the file system and fstab :
 
 ![FS and partitions options](img/4_partition_options.png)

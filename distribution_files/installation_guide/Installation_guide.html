@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Installation guide</title>
+	<style type="text/css">
+	body{
+		font-family: "Arial";
+		text-align: justify;
+	}
+	h1{
+		padding-top: 10px;
+		border-bottom: 2px solid #E3E3E3;
+	}
+	h2{
+		padding-top: 10px;
+		border-bottom: 1px dashed #E3E3E3;
+	}
+	div.main{
+		width: 1000px;
+		margin: 0 auto;
+		background-color: #FFFFFF;
+		border-left: 4px solid #E3E3E3;
+		border-right: 4px solid #E3E3E3;
+		border-bottom: 4px solid #E3E3E3;
+		border-top: 4px solid #E3E3E3;
+		border-radius: 5px;
+	}
+	article{
+		padding: 20px;
+		background-color: white;
+		border-left: 1px solid #CCCCCC;
+		border-right: 1px solid #CCCCCC;
+		border-bottom: 1px solid #CCCCCC;
+		border-top: 1px solid #CCCCCC;
+	}
+	p{
+		padding: 5px;
+	}
+	img{
+		max-width: 900px;
+		display: block;
+		margin: 0 auto;
+	}
+	blockquote{
+		border-left: 4px solid #DDDDDD;
+		color: #777777;
+		padding: 0px 15px;
+	}
+	</style>
+</head>
+<body>
+
+	<div class="main">
+		<article>
+			<h1>
+				Installation guide
+			</h1>
+			<h2>
+				Introduction
+			</h2>
+			<p>
+				This installation guide don't replace the 
+				<a href="http://doc.opensuse.org/documentation/html/openSUSE/opensuse-startup/art.osuse.installquick.html">official installation guide</a>
+				, we only expose some additional configuration.
+			</p>
+			<h2>
+				Start the installation
+			</h2>
+			<p>On your desktop you should be able to see a unique icon named "Install on hard drive". When you click on it, this terminal window appears :</p>
+			<p>
+				<a href="img/1_launch.png">
+					<img src="img/1_launch.png" alt="Password to install">
+				</a>
+			</p>
+			<p>By default the password is "linux". The options asked by the installer are well known, documented and straightforward so we won't explain them here.</p>
+			<h2>
+				Partitioning
+			</h2>
+			<p>
+				<a href="img/2_partition_setup.png">
+					<img src="img/2_partition_setup.png" alt="Partition setup" style="max-width:900px;">
+				</a>
+			</p>
+			<p>This is where you will do some modifications. Click on the "Edit Partition Setup" button. You should have a window like this :</p>
+			<p>
+				<a href="img/3_partition_details.png">
+					<img src="img/3_partition_details.png" alt="Expert partitioner" style="max-width:900px;">
+				</a>
+			</p>
+			<blockquote>
+				<p>Note : You probably haven't as many partitions as I do on /dev/sda, this is perfectly normal.</p>
+			</blockquote>
+			<p>
+				<strong>You will have to do the following manipulation for each partition (if you want multiple partitions).</strong>
+			</p>
+			<ol>
+				<li>Select and edit a partition (2 and 3 of the picture above)</li>
+				<li>Edit the options for the file system and fstab :</li>
+			</ol>
+			<p>
+				<a href="img/4_partition_options.png">
+					<img src="img/4_partition_options.png" alt="FS and partitions options" style="max-width:900px;">
+				</a>
+			</p>
+			<blockquote>
+				<p>Explanation : By default the file system journal write every access, creation and modification of files. This cause to wake up the hard disk each thus it consumes more power.</p>
+			</blockquote>
+			<p>Then you can continue the installation wizard as a regular OpenSUSE installation.</p>
+		</article>
+	</div>
+
+</body>
+</html>
