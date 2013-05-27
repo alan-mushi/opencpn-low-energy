@@ -40,5 +40,7 @@ Files integrated in the distribution :
 		<tr><td colspan="4">Details : Systemd service which manages unsyncvar.</td></tr>
 		<tr><td>.xscreensaver</td><td>/etc/skel/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
 		<tr><td colspan="4">Details : Settings for xscreensaver https://github.com/alan-mushi/opencpn-low-energy/wiki/Screen-brightness#screen-saver.</td></tr>
+		<tr><td>installation_guide/</td><td>/etc/skel/Desktop/ (content of the folder)</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
+		<tr><td colspan="4">Details : Installation guide in html with pictures.</td></tr>
 	</tbody>
 </table>
