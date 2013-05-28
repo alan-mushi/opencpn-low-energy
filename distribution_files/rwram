@@ -44,10 +44,10 @@ start()
 	[ `id -u` -eq 0 ] || return 4
 	[ -d $path_ram ]  || [ $path_ram -eq "/" ] || return 1
 	[ -d $path_hdd ]  || mkdir -p $path_hdd    || return 1
-	size_check $LOG_RAM        || return 150
-	size_check $CACHE_RAM      || return 151
-	size_check $HOME_CACHE_RAM || return 152
-	size_check $TMP_RAM        || return 153
+	size_check $LOG_RAM        && return 150
+	size_check $CACHE_RAM      && return 151
+	size_check $HOME_CACHE_RAM && return 152
+	size_check $TMP_RAM        && return 153
 
 
 	mount --bind $path_ram $path_hdd
