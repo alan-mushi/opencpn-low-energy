@@ -62,7 +62,7 @@ if args.serial != None :
 	else :
 		print "[+] Device " + args.serial + " found."
 		if args.flush == False and args.dump_stream == None and args.duration == None and args.list_datastreams == False :
-			sys.stderr.write( "[-] You have to select an action {--flush | --dump-last | --measure-duration}.\n\tSee " + sys.argv[0] + " for details.\n" )
+			sys.stderr.write( "[-] You have to select an action {--flush | --dump | --measure-duration}.\n\tSee " + sys.argv[0] + " for details.\n" )
 			sys.exit( 1 )
 else :
 	print "[*] List all currently available devices :"
