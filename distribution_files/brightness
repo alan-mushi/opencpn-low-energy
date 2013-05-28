@@ -6,7 +6,7 @@ if [ "$1" != "nosleep" ]; then
 fi
 
 # setting the screen brightness to 50% in one step
-xbacklight -set 50 -time 0 -steps 1 2>&1 /dev/null || other_way=true
+xbacklight -set 50 -time 0 -steps 1 || other_way=true
 
 # if we can't set up the backlight with xbacklight, we use another way
 if [ $other_way = true ]; then
