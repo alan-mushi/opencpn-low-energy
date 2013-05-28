@@ -6,12 +6,9 @@
 # DEPENDENCIES : awk, du, free, head, mount, umount
 # USAGE : systemctl {start|stop|status|reload} rwramd
 
+source /usr/lib/rwram
 
 NAME="rwramd"
-#Sandboxing
-OLD_PATH=$PATH
-PATH="/usr/bin/:/bin/"
-USER=`echo $USER | tr -d "../"`
 MODE="0755"
 
 CACHE_RAM="/var/cache"
@@ -24,154 +21,38 @@ TMP_RAM="/var/tmp"
 TMP_HDD="/mnt/var/tmp.permanent/"
 
 
-size_check() {
-	# Parameter
-	#   $1  the path to the folder to check
-	# Return
-	#	0	operations are successful
-	#	1	there isn't enough size on RAM to mount the folder
-	local to_check=$1
-	
-	#Get the disk usage of future mounted folder in bytes
-	local size_disk=`du -bs $to_check |cut -f1`
-	#Get free memory available in bytes
-	local mem_free=`free -b | awk 'NR==2 {print $4}'`
-	
-	#Get the sign of expected memory use
-	local sign=`echo $(($mem_free - $size_disk - 700000000))| head -c 1`
-	
-	if [ "$sign" = "-" ]; then
-		return 1
-	fi
-	
-	return 0
-}
-
-start()
-{
-	# Parameter
-	#   $1  the mount point in RAM
-	#   $2  the mount point in HDD
-	# Return
-	#	0		operations are sucessful (or service already running)
-	#	1		something went wrong (folder doesn't exists, can't be created or mounted)
-	#	4		program isn't running as root
-	#	150		/var/log cannot be mounted in RAM (Not enough memory)
-	#	151		/var/cache cannot be mounted in RAM (Not enough memory)
-	#	152		/home/user/.cache cannot be mounted in RAM (Not enough memory)
-	#	153		/var/tmp cannot be mounted in RAM (Not enough memory)
-	local path_ram=$1
-	local path_hdd=$2
-	local folder=`basename $path_ram`
-	
-	echo $path_ram $path_hdd $folder
-
-	[ -f /var/lock/$NAME.lock ] && return 0
-	[ `id -u` -eq 0 ] || return 4
-	[ -d $path_ram ]  || [ $path_ram -eq "/" ] || return 1
-	[ -d $path_hdd ]  || mkdir -p $path_hdd    || return 1
-	size_check $LOG_RAM        || return 150
-	size_check $CACHE_RAM      || return 151
-	size_check $HOME_CACHE_RAM || return 152
-	size_check $TMP_RAM        || return 153
-
-
-	mount --bind $path_ram $path_hdd
-	
-	#Stop propagation between ram and hdd
-	mount --make-private $path_hdd
-
-	#Will be named 'rwramd-.cache' for example
-	mount -t tmpfs -o nosuid,noexec,nodev,mode=$MODE $NAME-$folder $path_ram
-	local vol_mounted=$?
-	
-	mount --make-private $path_ram
-
-	#If mounted, populates it
-	if [ $vol_mounted -eq 0 ]; then
-		if cp -rfp $path_hdd -T $path_ram; then
-			touch /var/lock/$NAME.lock
-			return 0
-		fi
-		# Else rollback the mount
-		umount $path_ram
-	fi
-
-	# Else rollback the directory mangling
-	umount $path_hdd
-	rm -f /var/lock/$NAME.lock
-	
-	return 1
-}
-
-stop() 
-{
-	# Parameter
-	#   $1  the mount point in RAM
-	#   $2  the mount point in HDD
-	# Return
-	#	0	daemon has been stopped (or was already stopped)
-	#	1	something went wrong (folder doesn't exists)
-	#	4	the script isn't running as root
-	local path_ram=$1
-	local path_hdd=$2
-	
-	echo $path_ram $path_hdd
-	
-	[ -f /var/lock/$NAME.lock ] || return 0
-	[ -d $path_ram ]  || return 1
-	[ -d $path_hdd ]  || return 1
-	# Check if I am root
-	[ `id -u` -eq 0 ] || return 4
-
-
-	# Merge changes back to permanent storage
-	cp -rfup $path_ram -T $path_hdd
-
-	umount -l $path_ram
-	umount -l $path_hdd
-	rm -r /var/lock/$NAME.lock
-
-	return 0
-}
-
-reload()
-{
-	# Parameter
-	#   $1  the mount point in RAM
-	#   $2  the mount point in HDD
-	# Return
-	#	0	daemon has been reloaded
-	#	1	something went wrong (folder doesn't exists)
-	#	4	the script isn't running as root
-	local path_ram=$1
-	local path_hdd=$2
-
-	[ -f /var/lock/$NAME.lock ] || return 0
-	[ -d $path_ram ]  || return 1
-	[ -d $path_hdd ]  || return 1
-	[ `id -u` -eq 0 ] || return 4
-
-	echo $path_ram $path_hdd
-	# Merge changes back to permanent storage
-	cp -rfup $path_ram -T $path_hdd
-
-	return 0
-}
-
 #Execute options
 case $1 in
-	start|stop|reload)
-		echo $1 $LOG_RAM        $LOG_HDD
-		$1 $LOG_RAM        $LOG_HDD
-		$1 $CACHE_RAM      $CACHE_HDD
-		$1 $HOME_CACHE_RAM $HOME_CACHE_HDD
-		$1 $TMP_RAM        $TMP_HDD
+	start)
+		if [ ! -f /var/lock/$NAME.lock ]; then
+			$1 $LOG_RAM        $LOG_HDD
+		
+			echo Log done
+			$1 $CACHE_RAM      $CACHE_HDD
+			$1 $TMP_RAM        $TMP_HDD
+		fi
+		;;
+	stop)
+		if [ -f /var/lock/$NAME.lock ]; then
+			echo $1 $LOG_RAM        $LOG_HDD
+			$1 $LOG_RAM        $LOG_HDD
+		
+			echo Log done
+			$1 $CACHE_RAM      $CACHE_HDD
+			$1 $TMP_RAM        $TMP_HDD
+			rm -r /var/lock/$NAME.lock
+		fi
+		;;
+	reload)
+		if [ -f /var/lock/$NAME.lock ]; then
+			$1 $LOG_RAM        $LOG_HDD
+		
+			echo Log done
+			$1 $CACHE_RAM      $CACHE_HDD
+			$1 $TMP_RAM        $TMP_HDD
+		fi
 		;;
 	*)
 		echo "Usage : systemctl {start|stop|status|reload} $0"
 		;;
 esac
-
-#Reset the path
-PATH=$OLD_PATH

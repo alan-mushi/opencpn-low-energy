@@ -1,5 +1,5 @@
 [Unit]
-Description=Moves the contents of /var/log, /var/cache, /var/tmp and /home/.cache to RAM.
+Description=%n
 Before=syslog.target
 
 [Service]
