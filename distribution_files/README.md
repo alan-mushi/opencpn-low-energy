@@ -36,8 +36,8 @@ Files integrated in the distribution :
 		<tr><td colspan="4">Details : Shell library for rwramd.</td></tr>
 		<tr><td>rwramd</td><td>/etc/init.d/</td><td>root / root</td><td>rwxr-xr-x</td></tr>
 		<tr><td colspan="4">Details : Service which moves /var/log, /var/cache and /var/tmp in RAM.</td></tr>
-		<tr><td>unsyncvar.service</td><td>/etc/systemd/system/</td><td>root / root</td><td>rw-r--r--</td></tr>
-		<tr><td colspan="4">Details : Systemd service which manages unsyncvar.</td></tr>
+		<tr><td>rwramd.service</td><td>/etc/systemd/system/</td><td>root / root</td><td>rw-r--r--</td></tr>
+		<tr><td colspan="4">Details : Systemd service which manages rwramd.</td></tr>
 		<tr><td>settings.ini</td><td>/etc/gtk-3.0/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
 		<tr><td colspan="4">Details : GTK configuration.</td></tr>
 		<tr><td>.xscreensaver</td><td>/etc/skel/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
