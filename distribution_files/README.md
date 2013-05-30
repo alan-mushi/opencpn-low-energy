@@ -32,6 +32,10 @@ Files integrated in the distribution :
 		<tr><td colspan="4">Details : Configuration of the panel.</td></tr>
 		<tr><td>parcellite-startup.desktop</td><td>/etc/skel/.config/autostart/</td><td>nobody / nobody</td><td>rw-r--r--</td></tr>
 		<tr><td colspan="4">Details : Remove the parcellite applet from the panel.</td></tr>
+		<tr><td>powertips</td><td>/etc/init.d/</td><td>root / root</td><td>rwxr-xr--</td></tr>
+		<tr><td colspan="4">Details : Retrieve powertop tuning advices and execute its.</td></tr>
+		<tr><td>powertips.service</td><td>/etc/systemd/system/</td><td>root / root</td><td>rw-r--r--</td></tr>
+		<tr><td colspan="4">Details : Systemd service which launch powertips.</td></tr>
 		<tr><td>rwram</td><td>/usr/lib/</td><td>root / root</td><td>rwxr-xr-x</td></tr>
 		<tr><td colspan="4">Details : Shell library for rwramd.</td></tr>
 		<tr><td>rwramd</td><td>/etc/init.d/</td><td>root / root</td><td>rwxr-xr-x</td></tr>
