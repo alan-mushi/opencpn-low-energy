@@ -1,0 +1,11 @@
+[Unit]
+Description=Runs some powertop tuning
+After=syslog.target
+
+[Service]
+Type=oneshot
+ExecStart=/etc/init.d/powertips
+
+
+[Install]
+WantedBy=multi-user.target

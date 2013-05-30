@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# delete the icon 'install' on desktops and installation guides
+# delete the icon 'install' on desktops and installation guides
 rm -rf /home/*/Desktop/{install.desktop,img/,Installation_guide.html} /etc/skel/Desktop/{install.desktop,img/,Installation_guide.html}
 
 
-if [ $(/bin/ls -1 /home |wc -l) != 1 ]; then 
+if [ $(/bin/ls -1 /home -name tux |wc -l) != 1 ]; then 
 	# this user isn't needed anymore
 	userdel -r tux
 else
@@ -25,14 +25,15 @@ if [ -e $grub_file ]; then
 	fi
 fi
 
-# add a crontab to force the brightness (xscreensaver changes when it resumes)
+# add a crontab to force the brightness (xscreensaver changes when it resumes)
 # and force the disk(s) to stop
 echo "*/2 * * * * /usr/bin/brightness nosleep" > /tmp/cron_task
 ROOT=$(mount -l | grep ' on / '| awk '{print $1}')
-# produce :
+# produce :
 #	* * * * * hdparm -Y /dev/sda1 ; [hdparm -Y /dev/sdX ; ]...
 echo "* * * * * " $(for i in $ROOT ; do echo "hdparm -Y $i ; " ; done) >> /tmp/cron_task
 crontab /tmp/cron_task
 rm /tmp/cron_task
 
 systemctl enable rwramd.service
+systemctl enable powertips.service

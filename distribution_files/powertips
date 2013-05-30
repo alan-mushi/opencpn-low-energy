@@ -1,0 +1,25 @@
+#!/bin/sh
+#ROLE: Retrieve proposed tuning of powertop and apply them
+#NOTE: Used by /etc/systemd/system/powertips.service
+#DEPENDENCIES: powertop, awk, grep, sed, wc
+
+powertop --time=1 --csv=powertips.csv
+
+#Get the line number given by grep
+FIRST_LINE=`cat powertips.csv | grep -n  "^Description;Script" | cut -d : -f1`
+LAST_LINE=`cat powertips.csv | grep -n "^\*\*Optimal Tuned Software Settings\*\*" | cut -d : -f1 `
+LINES=`wc -l powertips.csv|awk '{print $1}'`
+
+#Cut powertips.csv to get improvement tips
+COMMANDS=`sed -e "1,$FIRST_LINE d" < powertips.csv -e "$LAST_LINE,$LINES d" < powertips.csv`
+
+#Delete autosuspend for plugged peripherals
+COMMANDS=`echo $COMMANDS | sed -e "s/\" /\"\n/g" | sed -e "/^Autosuspend for USB/d"`
+
+#Select the scripts
+echo $COMMANDS |sed -e "s/\" /\"\n/g"| cut -d \; -f2 | sed 's/"/\n/' > powertips.sh
+
+chmod +x powertips.sh
+./powertips.sh
+rm powertips.sh
+rm powertips.csv
