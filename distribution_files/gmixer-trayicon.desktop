@@ -1,0 +1,18 @@
+[Desktop Entry]
+Version=1.0
+Name=GMixer
+Comment=Audio mixer for the Gnome Desktop Environment
+Comment[de]=LautstÃ¤rkeregelung fÃ¼r den GNOME Desktop
+Comment[fr]=Mixer audio pour l'environnement Gnome
+Comment[it]=Mixer audio per l'ambiente destkop GNOME
+Exec=gmixer -d
+Icon=gmixer
+StartupNotify=true
+Type=Application
+Categories=AudioVideo;Audio;Mixer;GTK;
+OnlyShowIn=XFCE;
+X-GNOME-Autostart-Phase=Desktop
+X-GNOME-Autostart-Notify=true
+X-KDE-autostart-after=panel
+X-SuSE-translate=true
+X-Desktop-File-Install-Version=0.21
