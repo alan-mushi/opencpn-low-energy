@@ -3,23 +3,29 @@
 #NOTE: Used by /etc/systemd/system/powertips.service
 #DEPENDENCIES: powertop, awk, grep, sed, wc
 
-powertop --time=1 --csv=powertips.csv
+CSV_FILE="/tmp/powertips.csv"
+SCRIPT_FILE="/tmp/powertips.sh"
+
+powertop --time=1 --csv=$CSV_FILE
+
 
 #Get the line number given by grep
-FIRST_LINE=`cat powertips.csv | grep -n  "^Description;Script" | cut -d : -f1`
-LAST_LINE=`cat powertips.csv | grep -n "^\*\*Optimal Tuned Software Settings\*\*" | cut -d : -f1 `
-LINES=`wc -l powertips.csv|awk '{print $1}'`
-
-#Cut powertips.csv to get improvement tips
-COMMANDS=`sed -e "1,$FIRST_LINE d" < powertips.csv -e "$LAST_LINE,$LINES d" < powertips.csv`
+FIRST_LINE=`grep -n  "^Description;Script" $CSV_FILE | cut -d : -f1`
+LAST_LINE=`grep -n "^\*\*Optimal Tuned Software Settings\*\*" $CSV_FILE | cut -d : -f1 `
+LINES=`wc -l $CSV_FILE|awk '{print $1}'`
+echo Creating script...
+#Cut csv report to get improvement tips
+COMMANDS=`sed -e "1,$FIRST_LINE d" < $CSV_FILE -e "$LAST_LINE,$LINES d" < $CSV_FILE`
 
 #Delete autosuspend for plugged peripherals
 COMMANDS=`echo $COMMANDS | sed -e "s/\" /\"\n/g" | sed -e "/^Autosuspend for USB/d"`
 
 #Select the scripts
-echo $COMMANDS |sed -e "s/\" /\"\n/g"| cut -d \; -f2 | sed 's/"/\n/' > powertips.sh
+echo $COMMANDS |sed -e "s/\" /\"\n/g"| cut -d \; -f2 | sed 's/"//' > $SCRIPT_FILE
 
-chmod +x powertips.sh
-./powertips.sh
-rm powertips.sh
-rm powertips.csv
+chmod +x $SCRIPT_FILE
+source $SCRIPT_FILE
+
+echo Removing tmp files
+
+rm $SCRIPT_FILE
