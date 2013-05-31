@@ -35,5 +35,7 @@ echo "* * * * * " $(for i in $ROOT ; do echo "hdparm -Y $i ; " ; done) >> /tmp/c
 crontab /tmp/cron_task
 rm /tmp/cron_task
 
+echo "tmpfs                /tmp                 tmpfs      defaults              0 0" >> /etc/fstab
+
 systemctl enable rwramd.service
 systemctl enable powertips.service
