@@ -55,9 +55,8 @@ if [ $(grep -c "/usr/bin/brightness" /etc/xdg/lxsession/LXDE/autostart) -eq 0 ];
 	echo "/usr/bin/brightness" >> /etc/xdg/lxsession/LXDE/autostart
 fi
 
-if [ $(sysctl -n vm.dirty_writeback_centisecs) != 360000 ] ; then
-	sysctl -w vm.dirty_writeback_centisecs=360000
-	sysctl -w vm.dirty_expire_centisecs=360000
+if [ $(sysctl -n vm.dirty_writeback_centisecs) != 1500 ] ; then
+	sysctl -w vm.dirty_writeback_centisecs=1500
 fi
 
 if [ $(sysctl -n vm.dirty_background_ratio) != 20 ] ; then
