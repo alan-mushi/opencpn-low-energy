@@ -31,10 +31,11 @@ echo "*/2 * * * * /usr/bin/brightness nosleep" > /tmp/cron_task
 ROOT=$(mount -l | grep ' on / '| awk '{print $1}')
 # produce :
 #	* * * * * hdparm -Y /dev/sda1 ; [hdparm -Y /dev/sdX ; ]...
-echo "* * * * * " $(for i in $ROOT ; do echo "hdparm -Y $i ; " ; done) >> /tmp/cron_task
+echo "*/10 * * * * " $(for i in $ROOT ; do echo "hdparm -Y $i ; " ; done) >> /tmp/cron_task
 crontab /tmp/cron_task
 rm /tmp/cron_task
 
+# mount /tmp in ram
 echo "tmpfs                /tmp                 tmpfs      defaults              0 0" >> /etc/fstab
 
 systemctl enable rwramd.service
