@@ -1,0 +1,103 @@
+# The profile name
+#
+NAME="opencpn"
+
+# Short description of the profile, what characteristics it has, etc...
+#
+DESCRIPTION="Slow down the system at the maximum"
+
+# Set the cpu frequency scaling governor
+# Possible values are powersave, performance, ondemand and userspace
+#
+# Kernel documenatation: cpu-freq/user-guide.txt
+#
+# File: /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+#
+CPUFREQ_GOVERNOR="ondemand"
+
+# See http://www.lesswatts.org/tips/cpu.php for a good explanation about
+# what it does
+#
+# Possible values: 0 (default) or 1
+#
+# File: /sys/devices/system/cpu/sched_mc_power_savings
+#
+CPUFREQ_SCHED_MC_POWER_SAVINGS="0"
+
+# Defines the time the CPU has to be busy in order to switch up
+# frequencies. This setting does only make sense in conjunction with the
+# ondemand governor
+#
+# Kernel documenatation: cpu-freq/governors.txt
+#
+# File: /sys/devices/system/cpu/cpu*/cpufreq/ondemand/up_threshold
+#
+CPUFREQ_ONDEMAND_UP_THRESHOLD=""
+
+# Generally the kernel sets default values for the sampling rate. For slower
+# operations, set higher sampling range values.
+# This option is rather for hardware optimization then for powersaving.
+#
+# File: /sys/devices/system/cpu/cpu*/cpufreq/ondemand/sampling_rate
+#
+CPUFREQ_ONDEMAND_SAMPLING_RATE=""
+
+# This will lower the target CPU frequency by a specified percent.
+# powersave_bias is in units of 0.1%, so it has an effective range of 1
+# through 1000, resulting in 0.1% to 100% impact.
+#
+# File: /sys/devices/system/cpu/cpu*/cpufreq/ondemand/powersave_bias
+#
+CPUFREQ_ONDEMAND_POWERSAVE_BIAS=""
+
+# Set whether to enable or disable the SATA Aggressive Link Power Management
+# Reference: http://www.lesswatts.org/tips/disks.php
+# Attention: This will disable hotplug capabilities
+#
+# Possible values: min_power, max_performance, medium_power
+# Kernel documentation: scsi/link_power_management_policy.txt
+#
+# File: /sys/class/scsi_host/host*/link_power_management_policy
+#
+SATA_ALPM="min_power"
+
+# External script or binary which gets executed at the end of profile
+# activation
+#
+# Possible values: Full path to executable
+#
+EXTERNAL_HOOK=""
+
+# Command to execute when the power button is pressed and there is no
+# _active_ and _running_ X session
+#
+# File: /usr/lib/acpid/power_button
+#
+POWER_BUTTON_HOOK=""
+
+# Kernel buffers writes to files that applications perform for a period of
+# time.  Kernel default is 500 (5 seconds), a good starting point for
+# increasing it would be 1500
+# Reference: http://www.lesswatts.org/tips/disks.php
+# Kernel documentation: laptops/laptop-mode.txt
+#
+# Possible values: centiseconds
+#
+# File: /proc/sys/vm/dirty_writeback_centisecs
+#
+DIRTY_WRITEBACK_CENTISECS="1500"
+
+# Read-ahead, in kilobytes. You can spin down the disk while playing
+# MP3/OGG by setting the disk readahead to a reasonable size, e.g. 3072 (3
+# MB).  Effectively, the disk will read a complete MP3 at once, and will
+# then spin down while the MP3/OGG is playing. Don't set this too high,
+# because the readahead is applied to _all_ files that are read from disk.
+# Kernel default is currenty 128. Good starting point would be a value of
+# 3072.
+# Reference: laptop-mode-tools.
+#
+# Possible values: KB
+#
+# File: /sys/block/sd?/queue/read_ahead_kb
+#
+READ_AHEAD_KB="5120"
