@@ -5,7 +5,7 @@ rm -rf /home/*/Desktop/{install.desktop,img/,Installation_guide.html} /etc/skel/
 
 U="opencpn"
 
-if [ $(/bin/ls -1 /home -name $U |wc -l) != 1 ]; then 
+if [ $(/bin/ls -1 /home/$U |wc -l) != 1 ]; then 
 	# this user isn't needed anymore
 	userdel -r $U
 else
