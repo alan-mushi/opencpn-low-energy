@@ -10,7 +10,7 @@ On your desktop you should be able to see a unique icon named "Install on hard d
 
 ![Password to install](img/1_launch.png)
 
-By default the password is "opencpn". The options asked by the installer are well known, documented and straightforward so we won't explain them here.
+By default the password is blank. The options asked by the installer are well known, documented and straightforward so we won't explain them here.
 
 ## Partitioning
 
