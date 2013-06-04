@@ -17,11 +17,12 @@ fi
 
 # modifying grub config and rebuild grub
 grub_file='/etc/default/grub'
+. /studio/profile
 if [ -e $grub_file ]; then
 	# changing the menu entry for our distribution if needed
 	DISTRIB_NAME=$(sed -n 7p $grub_file |awk 'BEGIN {FS="\""};{print $2}')
 	if [ "$DISTRIB_NAME" != "OpenCPN distribution" ] ; then 
-		sed -i -e "7s/GRUB_DISTRIBUTOR=\"openSUSE 12.3\"/GRUB_DISTRIBUTOR=\"OpenCPN distribution\"/" $grub_file
+		sed -i -e "7s/GRUB_DISTRIBUTOR=\"openSUSE 12.3\"/GRUB_DISTRIBUTOR=\"OpenCPN distribution ($kiwi_iversion)\"/" $grub_file
 		grub2-mkconfig -o /boot/grub2/grub.cfg
 	fi
 fi
