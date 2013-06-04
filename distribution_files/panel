@@ -61,6 +61,12 @@ Plugin {
         Button {
             id=/usr/share/applications/chromium-browser.desktop
         }
+        Button {
+            id=/usr/share/applications/opencpn.desktop
+        }
+        Button {
+            id=/usr/share/applications/zyGrib.desktop
+        }
     }
 }
 
