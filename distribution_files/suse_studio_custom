@@ -22,7 +22,7 @@ cpupower -c all frequency-set -u $FREQ # we don't touch the governor, pm-profile
 # we stop / disable unwanted services
 if [ -n $(service --status-all |grep sshd | awk '{print $4}') ]; then
     systemctl stop sshd.service
-	systemctl disable sshd.service
+    systemctl disable sshd.service
 fi
 
 if [ -n $(service --status-all |grep bluetooth | awk '{print $4}') ]; then
@@ -30,24 +30,14 @@ if [ -n $(service --status-all |grep bluetooth | awk '{print $4}') ]; then
 	systemctl disable bluetooth.service
 fi
 
-# Check how we can reduce screen brightness
-xbacklight 2> /dev/null || other_way=true
-# if xbacklight isn't supported,
 # we need to set the right permissions or our user can't change
 # the screen brightness without login as root.
-if [ $other_way = true ] ; then
-	acpi_available=$(ls /proc/acpi/video/ 2> /dev/null |wc -l)
-	if [ $acpi_available -gt 0 ]; then
-		# if the video is supported by acpi
-		FILE="/sys/class/backlight/acpi_video0/brightness"
-	else
-		# if the video is NOT supported by acpi
-		# we use the full path to reach 'ls' because an alias may misbehave
-		FILE=$(/bin/ls -d /sys/class/backlight/*_backlight/brightness |head -n 1)
+for FILE in $(/bin/ls -d1 /sys/class/backlight/*/brightness); do
+    if [ $? -eq 0 ]; then
+		chown root:users $FILE
+		chmod g+w $FILE
 	fi
-	chown root:users $FILE
-	chmod g+w $FILE
-fi
+done
 
 # we run our script at the lxsession start
 # added here to "survive" the install
