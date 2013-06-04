@@ -9,6 +9,6 @@ fi
 for BASE in $(/bin/ls -d1 /sys/class/backlight/*); do
 	if [ $? -eq 0 ]; then
 		RES=$(($(cat $BASE/max_brightness) / 2))
-		echo "echo $RES > $BASE/brightness"
+		echo $RES > $BASE/brightness
 	fi
 done
