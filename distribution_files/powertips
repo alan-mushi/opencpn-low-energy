@@ -5,27 +5,49 @@
 
 CSV_FILE="/tmp/powertips.csv"
 SCRIPT_FILE="/tmp/powertips.sh"
+TMP_FILE="/tmp/tmp.csv"
 
 powertop --time=1 --csv=$CSV_FILE
 
 
-#Get the line number given by grep
+#Get the line number with grep
 FIRST_LINE=`grep -n  "^Description;Script" $CSV_FILE | cut -d : -f1`
 LAST_LINE=`grep -n "^\*\*Optimal Tuned Software Settings\*\*" $CSV_FILE | cut -d : -f1 `
 LINES=`wc -l $CSV_FILE|awk '{print $1}'`
 echo Creating script...
 #Cut csv report to get improvement tips
-COMMANDS=`sed -e "1,$FIRST_LINE d" < $CSV_FILE -e "$LAST_LINE,$LINES d" < $CSV_FILE`
+sed -e "1,$FIRST_LINE d" < $CSV_FILE -e "$LAST_LINE,$LINES d" < $CSV_FILE > $TMP_FILE
+cat $TMP_FILE > $CSV_FILE
 
-#Delete autosuspend for plugged peripherals
-COMMANDS=`echo $COMMANDS | sed -e "s/\" /\"\n/g" | sed -e "/^Autosuspend for USB/d"`
+# enable powersave mode for wireless
+if [ -n "`grep "^Wireless Power Saving" $CSV_FILE`" ]; then
+	COMMAND=`grep "^Wireless Power Saving" $CSV_FILE | cut -d \; -f2`
+	echo Do: $COMMAND
+	/bin/sh -c '$COMMAND'
+fi
+#enable powersave mode for audio chip
+grep "^Enable Audio codec power" $TMP_FILE | cut -d \; -f2 | sed 's/"//' >> $SCRIPT_FILE
+#disable a watchdog which send kernel panic if pc is freezing
+grep "^NMI watchdog should be turned off" $TMP_FILE | cut -d \; -f2 | sed 's/"//' >> $SCRIPT_FILE
+#slow buffer cache writing
+grep "^VM writeback timeout" $TMP_FILE | cut -d \; -f2 | sed 's/"//' >> $SCRIPT_FILE
+#enable powermanager for controllers
+grep "^Runtime PM for PCI Device" $TMP_FILE | cut -d \; -f2 | sed 's/"//' >> $SCRIPT_FILE
+#enable powersave for sata controller
+grep "^Enable SATA link power" $TMP_FILE | cut -d \; -f2 | sed 's/"//' >> $SCRIPT_FILE
+#enable wake-on-lan, which switch on automatically wire connections 
+grep "^Wake-on-lan status" $TMP_FILE | cut -d \; -f2 | sed 's/"//' >> $SCRIPT_FILE
+#use ondemand profile to manage cpu frequency
+grep "^Using 'ondemand'" $TMP_FILE | cut -d \; -f2 | sed 's/"//' >> $SCRIPT_FILE
+#use autosuspend for unspotted usb device
+grep "^Autosuspend for unknown USB" $TMP_FILE | cut -d \; -f2 | sed 's/"//' >> $SCRIPT_FILE
 
-#Select the scripts
-echo $COMMANDS |sed -e "s/\" /\"\n/g"| cut -d \; -f2 | sed 's/"//' > $SCRIPT_FILE
-
+echo Execute script ...
 chmod +x $SCRIPT_FILE
+
 source $SCRIPT_FILE
 
 echo Removing tmp files
 
 rm $SCRIPT_FILE
+rm $TMP_FILE
