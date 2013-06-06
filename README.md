@@ -1,5 +1,5 @@
 # opencpn-low-energy
 
-This repository is used to host content (pictures, diagrams and files for included in the distribution) used for the wiki.
+This repository is used to host files for the distributions and measures we realized. 
 
-So please, visit the [wiki](https://github.com/alan-mushi/opencpn-low-energy/wiki).
+You can find the wiki explaining our process to developp a low energy distribution for OpenCPN [here](https://en.opensuse.org/OpenCPN-low-energy).
