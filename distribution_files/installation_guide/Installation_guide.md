@@ -4,6 +4,8 @@
 
 This installation guide don't replace the [official installation guide](http://doc.opensuse.org/documentation/html/openSUSE/opensuse-startup/art.osuse.installquick.html), we only expose some additional configuration.
 
+**We faced the fact that some computers need an internet access (by ethernet) to boot on the two first start up.**
+
 ## Start the installation
 
 On your desktop you should be able to see a unique icon named "Install on hard drive". When you click on it, this terminal window appears :
